@@ -1,5 +1,5 @@
 # Ignore the build folder
 build/
-build.zip/
-OFL.txt/
-tempCodeRunnerFile.py/
+build.zip
+OFL.txt
+tempCodeRunnerFile.py
