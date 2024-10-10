@@ -28,7 +28,6 @@ clock = pygame.time.Clock()
 running = True
 image_hang=0
 i=0
-
 count1=0
 bubble_font=pygame.font.Font("Macondo-Regular.ttf",40)
 qfont=pygame.font.Font("AmaticSC-Bold.ttf",40)
@@ -111,12 +110,6 @@ def initialize_game():
         array.append(char)
     array = array[:26]
    
-
-
-            
-
-
-
 def draw_text():
     question = qfont.render(key,10,"black")#rendering it
     screen.blit(question,(300,75))#placing img onto the screen
@@ -149,18 +142,15 @@ def hang(x):
     return x1
 def draw_letters():
     global array,count1,check,level_number
- 
-    
+
     z=20
     b=20
     count=0
     rect=[]
     rect1=[]
  
-    
-    
     for p in array:
-        print(p,end=" ")  
+        # print(p,end=" ")  
         if count in range(0,13):
             letter=qfont.render(p,10,"black")
             rect.append(letter.get_rect(topleft=(100+z,400)))
@@ -168,7 +158,6 @@ def draw_letters():
             screen.blit(letter,rect[-1])
             pygame.draw.rect(screen,(255,255,255),rect[-1],width=-1)
     
-
         else:
             letter=qfont.render(p,10,"black")
             rect1.append(letter.get_rect(topleft=(100+b,500)))
@@ -177,12 +166,11 @@ def draw_letters():
             pygame.draw.rect(screen,(255,255,255),rect1[-1],width=-1)
             b=b+40
         z=z+40
-        if p=="Z":
-            
+        if p=="Z":           
             break
         count=count +1
        
-    print(count)
+    # print(count)
     rect2=rect+rect1
     return rect2
 def next():
@@ -226,10 +214,9 @@ def next():
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if next_rect.collidepoint(event.pos):
                 game()
-                print("next is clickked")
+                # print("next is clickked")
             return True
         pygame.display.flip()
-        
         
         clock.tick(60)
     pygame.quit()  
@@ -286,7 +273,7 @@ def lose():
                 game()
             elif quit_rect.collidepoint(event.pos):
                 pygame.QUIT()
-                print("quit is clicked")
+                # print("quit is clicked")
     
         pygame.display.flip()
         
@@ -301,7 +288,7 @@ def on_mouse_button_down(event, rect):
     
     guess=""
     s2=""
-    
+     
     for s in string1:#converting it to string
         s2+=s
     s3= qfont.render(s2,10,"black")#rendering it
@@ -311,29 +298,28 @@ def on_mouse_button_down(event, rect):
         # pygame.mixer.Sound.play(letter_click)
         for idx, l in enumerate(rect):#rect shows the position and at that position array elemnt starting from 1 i.e A is printed
             if l.collidepoint(event.pos):
-                print(array[idx] + "..................was pressed")
+                # print(array[idx] + "..................was pressed")
                 
                 guess+=array[idx] 
                 array[idx]="  "
                 
-              
                 if guess not in value:
                     
                     if len(string2)<6:
                         string2.append(guess)
                         incorrect=len(set(string2))
-                        print("the value of incorersct: "+str(incorrect)) 
+                        # print("the value of incorersct: "+str(incorrect)) 
                     else:
                         lose()
                 else:
                     for i,word in enumerate(value):
                         if word in guess:
                             string1[i]=word
-                print(string1)
+                # print(string1)
                 
                 if "_ " not in string1:
                     
-                    print("done") 
+                    # print("done") 
                     return True
                 
     
@@ -346,8 +332,7 @@ def game():
     running =True
     global incorrect,x1
     global array,count1,check,level_number
-    
-    
+      
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
@@ -365,7 +350,7 @@ def game():
         # next_screen(t)
         if incorrect!=0:
             x1=hang(incorrect)
-            print(x1)
+            # print(x1)
         if result:
             next_screen_result = next()
             if next_screen_result:
@@ -404,13 +389,10 @@ def intro():
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if next_rect.collidepoint(event.pos):
-               print("next is clickked")
-               return True
-      
+            #    print("next is clickked")
+               return True 
 
         pygame.display.flip()
-        
-        
         clock.tick(60)
     pygame.quit()
     return False
@@ -446,9 +428,9 @@ async def start_screen():
                 intro_result = intro()
                 if intro_result:  # If intro returns True, start the game
                     game()
-                print("start is clickked")
+                # print("start is clickked")
             elif quit_rect.collidepoint(event1.pos):
-                print("quit is clicked")
+                # print("quit is clicked")
                 pygame.quit()
         pygame.display.flip()#updating display
         clock.tick(60)  # limits FPS to 60
